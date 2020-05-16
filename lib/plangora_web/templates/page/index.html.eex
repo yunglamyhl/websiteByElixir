@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="h1 text-center mt-4 mb-4">
+        <%= gettext("Latest Video") %>
+    </div>
+
+    <div class="row mb-4">
+        <%= for video <- @latest_videos do %>
+        <div class="col">
+            <div class="card border-primary mb-5 ml-3 text-center" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= video.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= render_youtube_thumbnail(video.url) %>
+                    </p>
+                    <%= link(gettext("Watch Video"), to: Routes.video_post_path(@conn, :show, video.slug), class: "btn btn-outline-primary my-2 my-sm-0") %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+
+    <div class="h1 text-center mt-4 mb-4">
+        <%= gettext("Latest News") %>
+    </div>
+    <div class="row">
+        <%= for news <- @latest_news do %>
+        <div class="col">
+            <div class="card border-primary mb-5 ml-3 text-center" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= news.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= render_image(news.image) %>
+                    </p>
+                    <%= link(gettext("Watch News"), to: Routes.news_post_path(@conn, :show, news.slug), class: "btn btn-outline-primary my-2 my-sm-0") %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plangora Limited - Admin Panel</title>
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
+  <%= csrf_meta_tag() %>
+</head>
+
+<body>
+  <header id="header">
+    <%= img_tag(Routes.static_path(@conn, "/images/logo.jpg"), class: "logo", height: "60%", width: "50%") %>
+  </header>
+  <main role="main" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Plangora</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+          <li class="nav-item">
+            <div class="nav-link">
+              <%= link gettext("Home"), to: Routes.video_post_path(@conn, :index), class: "text-secondary" %>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <%= link gettext("Video"), to: Routes.admin_video_post_path(@conn, :index), class: "text-secondary" %>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <%= link gettext("News"), to: Routes.admin_news_post_path(@conn, :index), class: "text-secondary" %>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <%= link gettext("Message"), to: Routes.leads_path(@conn, :index), class: "text-secondary" %>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= render @view_module, @view_template, assigns %>
+
+    <footer>
+      <div>
+        <p class="sticky-bottom text-right font-italic">
+          © 2020 Plangora Limited
+        </p>
+      </div>
+    </footer>
+
+  </main>
+  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+</body>
+
+</html>

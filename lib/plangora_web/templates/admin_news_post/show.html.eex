@@ -1,0 +1,35 @@
+<div class="row">
+    <h1><%= @news_post.title %></h1>
+    <%= form_for @conn, Routes.admin_news_post_path(@conn, :show, @news_post), fn _f -> %>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <td> Description </td>
+                <td><%= {:safe, @news_post.body} %> </td>
+            </tr>
+            <tr>
+                <td> 中文標題 </td>
+                <td> <%= {:safe, @news_post.body} %> </td>
+            </tr>
+            <tr>
+                <td> Image </td>
+                <td> <%=render_image(@news_post.image) %></td>
+            </tr>
+            <tr>
+                <td> Slug </td>
+                <td> <%= @news_post.slug %> </td>
+            </tr>
+        </tbody>
+    </table>
+    <% end %>
+
+    <div class="col">
+        <div class="d-flex justify-content-around">
+            <%= link "New", to: Routes.admin_news_post_path(@conn, :new) %>
+            <%= link "Edit", to: Routes.admin_news_post_path(@conn, :edit, @news_post.id) %>
+            <%= link "Delete", to: Routes.admin_news_post_path(@conn, :delete, @news_post), method: :delete, data: [confirm: "Are you sure?"] %>
+            <%= link "Back", to: Routes.admin_news_post_path(@conn, :index) %>
+        </div>
+    </div>
+</div>

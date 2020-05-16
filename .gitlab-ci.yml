@@ -1,0 +1,59 @@
+#cache:
+#  key: plangora
+#  paths:
+#    - deps/
+#    - _build/
+#    - assets/node_modules/
+
+test:
+  image: plangora/alpine-elixir-phoenix:otp-22.2.8-elixir-1.10.2
+  variables:
+    DB_SERVER: postgres
+    POSTGRES_DB: plangora_test
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+  tags:
+    - docker
+  services:
+   - postgres:latest
+  script:
+   - cd assets && npm install && cd .. # cache NPM modules for future
+   - mix deps.get
+   - MIX_ENV=test mix test
+   - MIX_ENV=prod mix deps.compile # prebuild prod deps for faster building
+
+build:
+   stage: build
+   environment: production
+   only:
+     - master
+   image: docker:19.03
+   variables:
+     CONTAINER_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH/prod:$CI_COMMIT_SHORT_SHA
+     DOCKER_DRIVER: overlay2
+     DOCKER_TLS_CERTDIR: ""
+   tags:
+     - docker
+   services:
+     - docker:19.03-dind
+   before_script:
+     - docker info
+     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+   script:
+     - docker build --tag $CONTAINER_IMAGE .
+     - docker push $CONTAINER_IMAGE
+
+production:
+   cache: {} # no need for cache
+   stage: deploy
+   environment: production
+   tags:
+     - docker
+   only:
+     - master
+   image: plangora/helm-kubectl-doctl:kubectl-1.14.3-helm-2.14.1-doctl-1.20.0
+   variables:
+     CONTAINER_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH/prod:$CI_COMMIT_SHORT_SHA
+   script:
+     - doctl kubernetes cluster kubeconfig save internal
+     - kubectl set image -n default deployments/plangora plangora=$CONTAINER_IMAGE plangora-db-migrate=$CONTAINER_IMAGE

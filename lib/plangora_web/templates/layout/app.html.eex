@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plangora Limited</title>
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <%= csrf_meta_tag() %>
+</head>
+
+<body>
+
+  <header id="header">
+    <%= img_tag(Routes.static_path(@conn, "/images/logo.jpg"), class: "logo", height: "60%", width: "50%") %>
+  </header>
+  <main role="main" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border border-warning">
+      <a class="navbar-brand text-dark" style="font-size: 30px" href="#">Plangora</a>
+      <button class="navbar-toggler border border-warning" type="button" data-toggle="collapse"
+        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active mx-3">
+            <%= link gettext("Home"), to: Routes.page_path(@conn, :index), class: "text-dark nav-link" %>
+          </li>
+          <li class="nav-item mx-3">
+            <%= link gettext("Video"), to: Routes.video_post_path(@conn, :index), class: "text-dark nav-link" %>
+          </li>
+          <li class="nav-item mx-3">
+            <%= link gettext("News"), to: Routes.news_post_path(@conn, :index), class: "text-dark nav-link" %>
+          </li>
+          <li class="nav-item mx-3">
+            <%= link gettext("Contact"), to: Routes.page_path(@conn, :new), class: "text-dark nav-link" %>
+          </li>
+          <li class="nav-item dropdown mx-3">
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= gettext("Language") %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="?locale=en">EN</a>
+              <a class="dropdown-item" href="?locale=zh">中文</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <p class="alert alert-info col-11" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger col-11" role="alert"><%= get_flash(@conn, :error) %></p>
+
+    <%= render @view_module, @view_template, assigns %>
+
+    <footer>
+      <div class="sticky-bottom">
+        <div class="text-right font-italic">
+          <%= link img_tag(Routes.static_path(@conn, "/images/digital_ocean.jpeg"), class: "img-fluid do-img"), to: "https://m.do.co/c/b880985e5d50" %>
+          © 2020 Plangora Limited
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  <%= if assigns[:google_analytics_id] do %>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= @google_analytics_id %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', '<%= @google_analytics_id %>');
+  </script>
+  <% end %>
+</body>
+
+</html>

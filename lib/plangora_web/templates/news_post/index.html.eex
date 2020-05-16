@@ -1,0 +1,35 @@
+<div class="col-md-6 offset-md-3 mt-2 mb-4 border border-success pt-3 mt-5">
+    <%= form_for @conn, Routes.news_post_path(@conn, :index), [method: :get], fn f -> %>
+    <div class="input-group mb-3">
+        <%= search_input f, :query, placeholder: gettext("Search News"), class: "form-control" %>
+        <div class="input-group-append">
+            <%= submit gettext("Search"), class: "btn btn-outline-success  my-sm-0" %>
+        </div>
+    </div>
+    <% end %>
+</div>
+
+<div class="container">
+    <div class="text-center">
+        <h1><%= gettext("News") %></h1>
+    </div>
+
+    <div class="row">
+        <%= for news <- @news_posts do %>
+        <div class="col">
+            <div class="card border-primary mb-5 ml-1 mr-1 text-center" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= news.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= render_image(news.image) %>
+                    </p>
+                    <%= link(gettext("Watch News"), to: Routes.news_post_path(@conn, :show, news.slug), class: "btn btn-outline-primary my-2 my-sm-0") %>
+
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

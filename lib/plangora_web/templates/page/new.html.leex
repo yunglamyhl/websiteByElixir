@@ -1,0 +1,93 @@
+<div class="row contact mt-4">
+    <div class="col contact-data-container">
+        <div class="row">
+            <div class="col col-md-6 col-sd-6 left-column text-center">
+                <h1>
+                    <%= gettext("Contact Info") %>
+                </h1>
+                <div>
+                    <a href="#"
+                        class="fa fa-map-marker"></a><%= gettext("6/F, 101 King's Road, North Point, Hong Kong") %></br>
+                    <a href="#" class="fa fa-envelope"></a> info@plangora.com
+                </div>
+                <hr class="dashed">
+                <h1>
+                    <%= gettext("Get Social") %>
+                </h1>
+                <div class="social-list d-flex justify-content-center mb-4">
+
+                    <a href="https://www.facebook.com/PlangoraLtd/" class="fa fa-facebook"></a></br>
+                    <a href="https://www.youtube.com/channel/UCiTNXma-lzM6XjhgPQzKREg" class="fa fa-youtube"></a></br>
+                    <a href="https://www.instagram.com/plangoraltd/" class="fa fa-instagram"></a>
+
+                </div>
+            </div>
+
+            <div class="col col-md-6 left-column col-sd-6 text-center">
+                <h2><%= gettext("GET A QUOTE / CONTACT US!") %></h2>
+                <p>
+                    <%= gettext("To get a quote or send us an enquiry, please drop us a message, we will contact you as soon as possible.") %>
+                </p>
+
+                <%= form_for @changeset, "#", [phx_change: "validate", phx_submit: "send"], fn f -> %>
+
+                <div class="contact-form">
+                    <div class="form-group row">
+                        <div class="form-row-icon">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-sm-9">
+                            <%= text_input f, :name, placeholder: gettext("Name"), class: "form-control data-input" %>
+                            <%= error_tag(f, :name) %>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-row-icon">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-sm-9">
+                            <%= text_input f, :email, placeholder: gettext("Email"), class: "form-control data-input" %>
+                            <%= error_tag(f, :email) %>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-row-icon">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-sm-9">
+                            <%= text_input f, :phone, placeholder: gettext("Phone"), class: "form-control data-input" %>
+                            <%= error_tag(f, :phone) %>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-row-icon">
+                            <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-sm-9">
+                            <%= textarea f, :message, placeholder: gettext("Message"), class: "form-control data-input" %>
+                            <%= error_tag(f, :message) %>
+                        </div>
+                    </div>
+
+                    <div class="form-actions mx-5" id="send">
+                        <%= if !@changeset.valid? do %>
+                        <%= submit gettext("Submit"), class: "send", disabled: true %>
+                        <% else %>
+                        <%= submit gettext("Submit"), class: "send" %>
+                        <% end %>
+                    </div>
+
+                    <%= if @sent do %>
+                    <div class="success-msg">
+                        <%= gettext("Thank you for your comment.") %>
+                    </div>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

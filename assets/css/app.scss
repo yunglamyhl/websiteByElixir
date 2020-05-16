@@ -1,0 +1,86 @@
+/* This file is for your main application css. */
+
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~trumbowyg/dist/ui/sass/trumbowyg.scss";
+@import "../../deps/phoenix_live_view/assets/css/live_view.css";
+
+.alert:empty{
+    display: none;
+}
+
+.logo {
+    width:40%; 
+    margin-bottom:3%; 
+    margin-top: 3%
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+}
+
+hr.dashed {
+    border-top: 2px dashed #999;
+}
+
+.navbar.navbar-expand-lg {
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+.social-list{
+    font-size: 30px;
+}
+
+.fa {
+    padding: 20px;
+    width: 80px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 5px;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.contact-form .fa {
+ padding: 0;
+}
+
+.send {
+    background: black;
+    color: white;
+    border: transparent;
+    border-radius: 0.33em;
+    &[disabled] {
+        opacity: 0.3;
+        border-radius: 0.33em;
+    }
+}
+
+.contact-form {
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
+}
+
+footer .do-img {
+    height: 40px;
+    width: 100px;
+}

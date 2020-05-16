@@ -1,0 +1,14 @@
+<h1 class="text-center mt-2 mb-4">
+    <%= render_translation(@news_post.title, @news_post.zh_title, @locale) %>
+</h1>
+
+<div style="text-align:center">
+    <%= render_image(@news_post.image) %>
+</div>
+
+<h6 class="mt-2 mb-4">
+    <%= gettext("Description") %>:
+</h6>
+<p class="text-justify text-sm-left font-weight-light">
+    <%= {:safe, render_translation(@news_post.body, @news_post.zh_body, @locale)} %>
+</p>

@@ -1,0 +1,16 @@
+<h1 class="text-center mt-2 mb-4">
+    <%= render_translation(@video_post.title, @video_post.zh_title, @locale) %>
+</h1>
+
+<div style="text-align:center">
+    <div class="embed-responsive embed-responsive-16by9">
+        <%= render_youtube_video(@video_post.url) %>
+    </div>
+</div>
+
+<h6 class="mt-2 mb-4">
+    <%= gettext("Description") %>:
+</h6>
+<p class="text-justify text-sm-left font-weight-light">
+    <%= render_translation(@video_post.description, @video_post.zh_description, @locale) %>
+</p>

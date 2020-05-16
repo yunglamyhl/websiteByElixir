@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+        <h1> Create Video Category </h1>
+
+        <%= form_for @changeset, Routes.video_category_path(@conn, :create), [as: :video_category], fn f -> %>
+
+            <div class="form-group">
+                <%= label f, :title, "Title" %>
+                <%= text_input f, :title, required: true, placeholder: "Title", class: "form-control" %>
+                <%= error_tag(f, :title) %>
+            </div>
+
+            <div class="form-actions">
+                <%= submit "Create Category", class: "button" %>
+            </div>
+        <% end %>
+        <div class="link">
+            <%= link "Back", to: Routes.admin_video_post_path(@conn, :index) %> 
+        </div> 
+    </div>
+</div>

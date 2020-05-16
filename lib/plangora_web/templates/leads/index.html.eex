@@ -1,0 +1,41 @@
+<div class="text-center">
+    <h1>Listing All Messages</h1>
+    </div>
+    
+    <div class="container mb-5 mt-3">
+        <table id="videodata"
+            class="table table-hover table-bordered videodata" 
+            style="width: 100%" >
+    
+            <thead>
+                <tr>
+                <th><b>Name</b></th>
+                <th><b>Message</b> </th>
+                <th><b> </b> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= for l <- @leads do %>
+                <tr>
+                    <th><%= l.name %> </th>
+                
+                    <th><%= l.message %> </th>
+                    
+                    <th><%= link "View", to: Routes.leads_path(@conn, :show, l.id) %> </th>
+    
+                </tr>
+                <% end %>
+            </tbody>
+                
+            <tfoot>
+                <tr>
+                <th><b>Name</b></th>
+                <th><b>Message</b> </th>
+                <th><b> </b> </th>
+                </tr>
+            </tfoot>   
+        </table>
+    </div>
+    
+    <%= link "Log out", to: Routes.admin_session_path(@conn, :delete), method: :delete %>
+    

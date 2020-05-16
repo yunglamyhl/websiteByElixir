@@ -1,0 +1,52 @@
+<div class="text-center">
+<h1>Listing All Video</h1>
+</div>
+
+<%= link "Upload New Video", to: Routes.admin_video_post_path(@conn, :new) %><br>
+<%= link "Create Video Category", to: Routes.video_category_path(@conn, :new) %><br>
+<%= link "All Video Categories", to: Routes.video_category_path(@conn, :index) %><br>
+<%= link "All", to: Routes.admin_video_post_path(@conn, :index) %>
+
+<div class="d-flex flex-row-reverse bd-highlight">
+    <%= form_for @conn, Routes.admin_video_post_path(@conn, :index), [method: :get, class: "pull-right"], fn f -> %>
+    <%= search_input f, :query %>
+    <%= submit "Search" %>
+    <% end %>
+</div>
+<div class="container mb-5 mt-3">
+    <table id="videodata"
+        class="table table-hover table-bordered videodata" 
+        style="width: 100%" >
+
+        <thead>
+            <tr>
+            <th><b>TITLE</b></th>
+            <th><b> SLUG</b> </th>
+            <th><b> </b> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <%= for video <- @video_posts do %>
+            <tr>
+                <th><%= video.title %> </th>
+            
+                <th><%= video.slug %> </th>
+                
+                <th><%= link "View", to: Routes.admin_video_post_path(@conn, :show, video.id) %> </th>
+
+            </tr>
+            <% end %>
+        </tbody>
+            
+        <tfoot>
+            <tr>
+            <th><b>TITLE</b></th>
+            <th><b> SLUG</b> </th>
+            <th><b> </b> </th>
+            </tr>
+        </tfoot>   
+    </table>
+</div>
+
+<%= link "Log out", to: Routes.admin_session_path(@conn, :delete), method: :delete %>
+

@@ -1,0 +1,44 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+
+<div class="form-group">
+    <%= label f, :zh_title, "中文標題" %>
+    <%= text_input f, :zh_title, placeholder: "中文標題", class: "form-control" %>
+    <%= error_tag(f, :zh_title) %>
+</div>
+
+<div class="form-group">
+    <%= label f, :title, "Title" %>
+    <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+    <%= error_tag(f, :title) %>
+</div>
+
+<div class="form-group">
+    <%= label f, :body, "Description" %>
+    <%= textarea f, :body, placeholder: "Description", class: "form-control editor" %>
+    <%= error_tag(f, :body) %>
+</div>
+
+<div class="form-group">
+    <%= label f, :zh_body, "中文描述" %>
+    <%= textarea f, :zh_body, placeholder: "中文描述", class: "form-control editor" %>
+    <%= error_tag(f, :zh_body) %>
+</div>
+
+<div class="form-group">
+    <%= label f, :slug, "Slug" %>
+    <%= text_input f, :slug, placeholder: "Slug", class: "form-control" %>
+    <%= error_tag(f, :slug) %>
+</div>
+
+<div class="form-group">
+    <%= label f, "Image", class: "control-label" %>
+    <%= file_input(f, :image_input, class: "form-control") %>
+    <%= hidden_input(f, :image) %>
+    <%= error_tag f, :image %>
+</div>
+
+<div class="form-actions">
+    <%= submit "Save" %>
+</div>
+
+<% end %>
